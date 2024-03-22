@@ -14,7 +14,6 @@ namespace ConsoleApp15
             char firstSymbol = '(';
             char secondSymbol = ')';
             int countFirstSymbol = 0;
-            int countSecondSymbol = 0;
             int depth = 0;
             string userInput;
 
@@ -26,23 +25,26 @@ namespace ConsoleApp15
                 if (userInput[i] == firstSymbol)
                 {
                     countFirstSymbol++;
-                    countSecondSymbol = 0;
+                    
+                    if(countFirstSymbol > depth)
+                    {
+                        depth = countFirstSymbol
+                    }
                 }
                 else if (userInput[i] == secondSymbol) 
                 {
-                    countSecondSymbol++;
                     countFirstSymbol--;
-                }
-
-                if (countFirstSymbol == 0)
-                {
-                    depth = countSecondSymbol;
+                    
+                    if(countFirstSymbol < 0)
+                    {
+                        break;
+                    }
                 }
             }
 
             if (countFirstSymbol == 0)
             {
-                Console.WriteLine($"корректный ввод:{userInput} глубина:{depth}");
+                Console.WriteLine($"ввод корректный глубина:{depth}");
             }
             else
             {
